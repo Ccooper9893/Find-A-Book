@@ -16,7 +16,7 @@ module.exports = {
     }
 
     if (!token) {
-      return req;
+      return req; //Return request back to front end if no token is provided
     }
 
     // verify token and get user data out of it
@@ -27,7 +27,7 @@ module.exports = {
       console.log('Invalid token');
     }
 
-    // return request with user data decoded from jwt
+    // return request with user data decoded from jwt to the front end
     return req;
   },
   signToken: function ({ username, email, _id }) {
