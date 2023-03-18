@@ -4,13 +4,13 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        //Get current users
+        //Get current users (context=authMiddleware)
         getSingleUser: async (parent, args, context) => {
 
             if(context.user) {
                 return User.findOne({
                     $or: [{_id: context.user._id}, {username: context.user.username}]
-                })
+                });
             };
 
             throw new AuthenticationError('Must be logged in to view saved books!');
@@ -23,7 +23,7 @@ const resolvers = {
             const user = await User.create({ username, email, password });
 
             const token = signToken(user); //Creating JWT token
-            
+
             return { token, user } //Return token and user data
         },
         login: async (parent, { username, email, password }) => {
@@ -37,7 +37,7 @@ const resolvers = {
             if(!correctPw) {
                 throw new AuthenticationError('Incorrect credentials!');
             };
-
+            //If valid credentials, create a JWT and return
             const token = signToken(user);
             return { token, user };
         },
