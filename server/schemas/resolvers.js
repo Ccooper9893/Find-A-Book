@@ -5,12 +5,12 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         //Get current users (context=authMiddleware)
-        getSingleUser: async (parent, args, context) => {
+        me: async (parent, args, context) => {
 
             if(context.user) {
                 return User.findOne({
                     $or: [{_id: context.user._id}, {username: context.user.username}]
-                });
+                }).populate('savedBooks')
             };
 
             throw new AuthenticationError('Must be logged in to view saved books!');
