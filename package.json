@@ -1,7 +1,7 @@
 {
-  "name": "googlebooks-app",
+  "name": "findabook-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Search website to find and save books using Google's book API",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
