@@ -5,12 +5,12 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         //Get current users (context=authMiddleware)
-        getSingleUser: async (parent, args, context) => {
+        me: async (parent, args, context) => {
 
             if(context.user) {
                 return User.findOne({
                     $or: [{_id: context.user._id}, {username: context.user.username}]
-                });
+                }).populate('savedBooks')
             };
 
             throw new AuthenticationError('Must be logged in to view saved books!');
@@ -18,7 +18,7 @@ const resolvers = {
     },
     Mutation: {
         //Deconstructing userFormData sent from signupform
-        createUser: async (parent, { username, email, password }) => { 
+        addUser: async (parent, { username, email, password }) => { 
 
             const user = await User.create({ username, email, password });
 
@@ -27,7 +27,10 @@ const resolvers = {
             return { token, user } //Return token and user data
         },
         login: async (parent, { username, email, password }) => {
-            const user = await User.findOne({ username, email });
+            console.log(username, password, email);
+            const user = await User.findOne({
+                $or: [{username: username}, {email: email}]
+            });
 
             if(!user) {
                 throw new AuthenticationError('No user found with email/username!');
@@ -52,7 +55,7 @@ const resolvers = {
             );
             return updatedUser;
         },
-        deleteBook: async(parent, { book }, context) => {
+        removeBook: async(parent, { book }, context) => {
             if(!context.user) {
                 throw new AuthenticationError('Must be logged in to save books!');
             };
