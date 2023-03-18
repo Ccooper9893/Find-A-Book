@@ -18,7 +18,7 @@ const resolvers = {
     },
     Mutation: {
         //Deconstructing userFormData sent from signupform
-        createUser: async (parent, { username, email, password }) => { 
+        addUser: async (parent, { username, email, password }) => { 
 
             const user = await User.create({ username, email, password });
 
@@ -49,16 +49,16 @@ const resolvers = {
                 {_id: context.user._id},
                 {$addToSet: {savedBooks: book}},
                 {new: true, runValidators: true},
-            );
+            ).populate('savedBooks');
             return updatedUser;
         },
-        deleteBook: async(parent, { book }, context) => {
+        removeBook: async(parent, { bookId }, context) => {
             if(!context.user) {
                 throw new AuthenticationError('Must be logged in to save books!');
             };
             const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},
-                {$pull: {savedBooks:{bookId:book.bookId}}},
+                {$pull: {savedBooks:{bookId}}},
                 {new:true},
             );
         },
