@@ -23,11 +23,10 @@ export const ADD_USER = gql`
         }
     }
 `;
-
+// const savedBook = await saveBook({variables: {bookData: bookToSave}});
 export const SAVE_BOOK = gql`
-    mutation saveBook($input: bookData) {
-        saveBook(bookData: $input) {
-            user {
+    mutation saveBook($bookData: BookInput!) {
+        saveBook(bookData: $bookData) {
                 _id
                 username
                 email
@@ -38,8 +37,7 @@ export const SAVE_BOOK = gql`
                     title
                     description
                     image
-                    link
-                }   
+                    link   
             }
         }
     }
@@ -48,18 +46,16 @@ export const SAVE_BOOK = gql`
 export const REMOVE_BOOK = gql`
     mutation removeBook($bookId: String!) {
         removeBook(bookId: $bookId) {
-            user {
-                _id
-                username
-                email
-                savedBooks {
-                    bookId
-                    authors
-                    description
-                    title
-                    image
-                    link
-                }
+            _id
+            username
+            email
+            savedBooks {
+                bookId
+                authors
+                description
+                title
+                image
+                link
             }
         }
     }

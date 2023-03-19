@@ -15,8 +15,10 @@ import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   
-  const { loading, userData } = useQuery(GET_ME);
+  const { loading, data } = useQuery(GET_ME);
   const [ removeBook, { error } ] = useMutation(REMOVE_BOOK);
+
+  const userData = data?.me || {};
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -24,26 +26,28 @@ const SavedBooks = () => {
 
     if (!token) {
       return false;
-    }
+    };
 
     try {
       //Remove book from user's saved books
-      removeBook(bookId);
+      const { data } = await removeBook({
+        variables: { bookId },
+      });
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
       console.error(err);
-    }
+    };
   };
 
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
-  }
+  };
 
   return (
     <>
-      <div fluid className='text-light bg-dark p-5'>
+      <div className='text-light bg-dark p-5'>
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
@@ -57,7 +61,7 @@ const SavedBooks = () => {
         <Row>
           {userData.savedBooks.map((book) => {
             return (
-              <Col md="4">
+              <Col key={book.bookId} md="4">
                 <Card key={book.bookId} border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>

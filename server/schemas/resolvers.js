@@ -8,7 +8,7 @@ const resolvers = {
         me: async (parent, args, context) => {
 
             if(context.user) {
-                return User.findOne({
+                return await User.findOne({
                     $or: [{_id: context.user._id}, {username: context.user.username}]
                 }).populate('savedBooks')
             };
@@ -27,7 +27,9 @@ const resolvers = {
             return { token, user } //Return token and user data
         },
         login: async (parent, { username, email, password }) => {
-            const user = await User.findOne({ username, email });
+            const user = await User.findOne({ 
+                $or: [{email: email}, {username: username}]
+             });
 
             if(!user) {
                 throw new AuthenticationError('No user found with email/username!');
@@ -41,18 +43,20 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        saveBook: async(parent, { book }, context) => {
+        saveBook: async(parent, { bookData }, context) => {
             if(!context.user) {
                 throw new AuthenticationError('Must be logged in to save books!');
             };
+            // console.log(bookData);
             const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},
-                {$addToSet: {savedBooks: book}},
+                {$addToSet: {savedBooks: bookData}},
                 {new: true, runValidators: true},
             ).populate('savedBooks');
             return updatedUser;
         },
         removeBook: async(parent, { bookId }, context) => {
+            // console.log(bookId);
             if(!context.user) {
                 throw new AuthenticationError('Must be logged in to save books!');
             };
