@@ -27,7 +27,7 @@ module.exports = {
       console.log('Invalid token');
     }
 
-    // return request with user data decoded from jwt to the front end
+    // return request with user data decoded from jwt
     return req;
   },
   signToken: function ({ username, email, _id }) {
