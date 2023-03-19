@@ -24,10 +24,9 @@ To install this application, follow these steps:
 
 1. Clone the repository to your local machine using git clone https://github.com/Ccooper9893/Find-A-Book.
 2. Navigate to the root folder of the project.
-3. Create a .env file to hold the JSON Web Token secret and the MongoDB database URL. The file should have the following format:
+3. Create a .env file to hold the JSON Web Token secret. The file should have the following format:
 ```
 JWT_SECRET=your_secret_key_here
-MONGODB_URI=your_mongodb_uri_here
 ```
 4. Replace your_secret_key_here with your preferred secret key and your_mongodb_uri_here with the URL for your MongoDB database.
 5. Install the dependencies for both the frontend and backend by running npm install.
@@ -54,6 +53,8 @@ To use this application, follow these steps:
 5. To view your saved books, click on the "Saved Books" link in the navigation bar. Here, you can see all of your saved books and click on a button to delete any books that you are no longer interested in. Note that you must be logged in to delete books.
 6. If you want to log out of your account, click on the "Logout" button in the navigation bar to log out and secure your data.
 By following these steps and logging in, you can easily search for and save your favorite books, manage your collection, and keep your data secure by logging out when you're finished.
+
+![giphygif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzM4YWRiMzQ2MmYwMzA3Y2JiYTFkNDg1NjViMDJjZjE2MGQyZTVkNiZjdD1n/DLDoL28Cs4WVSwTtlz/giphy.gif)
 
 ## *Software*
 ___
@@ -90,8 +91,6 @@ Github: https://github.com/Ccooper9893
 
 Github Repo: https://github.com/Ccooper9893/Find-A-Book
 
-## *Screenshots*
-___
 
 
 

@@ -92,7 +92,7 @@ const SearchBooks = () => {
 
   return (
     <>
-      <div className='text-light fluid bg-dark pt-5'>
+      <div className='text-light fluid bg-dark p-5'>
         <Container>
           <h1>Search for Books!</h1>
           <Form onSubmit={handleFormSubmit}>
