@@ -61,6 +61,8 @@ const resolvers = {
                 {$pull: {savedBooks:{bookId}}},
                 {new:true},
             );
+
+            return updatedUser;
         },
     },
 };
