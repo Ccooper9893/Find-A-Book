@@ -13,8 +13,8 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Cody Cooper",
+  "license": "MIT",
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
