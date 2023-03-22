@@ -26,14 +26,9 @@ To install this application, follow these steps:
 
 1. Clone the repository to your local machine using git clone https://github.com/Ccooper9893/Find-A-Book.
 2. Navigate to the root folder of the project.
-3. Create a .env file to hold the JSON Web Token secret. The file should have the following format:
-```
-JWT_SECRET=your_secret_key_here
-```
-4. Replace your_secret_key_here with your preferred secret key and your_mongodb_uri_here with the URL for your MongoDB database.
-5. Install the dependencies for both the frontend and backend by running npm install.
-6. To run the application for development, start the server and run the React scripts with npm run develop.
-7. To create a build using React, run npm run build.
+3. Install the dependencies for both the frontend and backend by running npm install.
+4. To run the application for development, start the server and run the React scripts with npm run develop.
+5. To create a build using React, run npm run build.
 
 Once you have completed these steps, you should be able to use the application on your local machine.
 
