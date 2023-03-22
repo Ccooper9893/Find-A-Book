@@ -18,7 +18,6 @@ https://findabook.herokuapp.com/
   - [Resources](#resources)
   - [License](#license)
   - [Questions](#questions)
-  - [Screenshots](#screenshots)
 
 ## *Installation*
 ___
